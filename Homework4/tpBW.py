@@ -11,6 +11,7 @@ import copy
 from ks import simple_kark_sort
 import numpy as np
 
+# RLE compression
 def rle(seq):
     l = 0
     r = 0
@@ -26,7 +27,7 @@ def rle(seq):
 # >>==========================================================================<<
 
 
-
+# Implements a BW transform, along with functions to reverse the transform, and use it to do word search
 
 class FMindex:
 
@@ -37,7 +38,8 @@ class FMindex:
         self.fm_rank = self.__get_fm_rank()
         self.count, self.next_smallest_letter = self.__get_count_smallest_letter()
         self.fm_ranks = self.__get_fm_ranks()
-
+    
+    # >>===[ Attribute initialisation functions ]===============================
     def __get_bwt(self, seq):
         return [seq[-1]] + [seq[self.sa[i]-1] if (self.sa[i]>0) else "$" for i in range(len(seq))]
 
@@ -81,6 +83,8 @@ class FMindex:
                 fm_ranks[character][i] = times_seen
         
         return fm_ranks
+    
+    # >>===[ Pattern matching functions ]=======================================
 
     def membership(self, pattern):
         i_min = self.count[pattern[-1]]
@@ -139,11 +143,6 @@ class FMindex:
     def lfmapping(self, i):
         return self.count[self.bwt[i]] + self.fm_rank[i] - 1
     
-    # >>===[ Attribute initialisation functions ]===============================
-
-
-
-    # >>===[ Pattern matching functions ]=======================================
 
 ex = FMindex("BANANA")
 print(ex.sa)
