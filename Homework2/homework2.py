@@ -9,6 +9,7 @@ For some reason, BLAST won't let me have results for sequences 1 and 4 even when
 Sequences are, in this order: , Sars-Cov-2, HIV1, , Sars-Cov-2 , Streptococcus (agalactiae, equi or suis)
 '''
 
+# Simple fasta parser
 def parse_fasta(filename):
     sequences = []
     with open(filename, "r") as file:
@@ -20,6 +21,7 @@ def parse_fasta(filename):
 letters_to_num = {'A': 1, 'C': 2, 'T': 4, 'G': 3, 'N': 0}
 letters_to_revnum = {'A': 4, 'C': 3, 'T': 1, 'G': 2, 'N':0}
 
+# Computes sets of canoncial 20-mers
 def calculate_20mer_set(inputs):
     
     counts = set()
@@ -38,6 +40,7 @@ def calculate_20mer_set(inputs):
             counts.add(current_read) #min(current_read, current_rev_read))
     return counts
 
+# Returns the jaccard index of two python sets
 def jaccard_index(set1,  set2):
     return float(len(set1 & set2)) / float(len(set1 | set2))
 
