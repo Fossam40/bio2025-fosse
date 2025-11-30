@@ -4,6 +4,7 @@ import random
 
 letters_to_num = {'A': 1, 'C': 2, 'T': 3, 'G': 4}
 
+# Takes a read as argument, returns a 29 long array with the number of k-mers, k<=30
 def calculate_word_complexity(inputs):
     counts = [Counter() for i in range(29)]
     current_read = [0] * 29
@@ -16,6 +17,7 @@ def calculate_word_complexity(inputs):
             counts[0][current_read[0]]+=1
     return [len(a) for a in counts]
 
+# Very simple fasta parsing
 def parse_fasta(filename):
     sequences = []
     with open(filename, "r") as file:
@@ -24,6 +26,7 @@ def parse_fasta(filename):
                 sequences.append(line[:-1])
     return ''.join(sequences)
 
+# Generates Fibonacci words
 def generate_fibonacci(length):
     init = ['A']
     while(len(init)<length):
@@ -34,11 +37,13 @@ def generate_fibonacci(length):
                 new_init.append('T')
         init = new_init
     return ''.join(init)
-
+    
+#Generates random words
 def generate_random(length):
     seq = [random.choice(['A','C','G','T']) for i in range(length)]
     return ''.join(seq)
 
+# Example plots, comparing Fibonacci vs Random vs actual sequences
 def main():
     sequence = parse_fasta("genome_hw1.fa")
     x = [i for i in range(2,31)]
