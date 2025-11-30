@@ -5,3 +5,7 @@ This repository contain the coursework of the BOX course taught at the ENS Renne
 - Bloom filters
 - A BLAST-inspired read aligner
 - An efficient Burrows-Wheeler transform class, allowing one to efficiently query and compress strings.
+
+Dependencies:
+- mmh3
+- xopen
